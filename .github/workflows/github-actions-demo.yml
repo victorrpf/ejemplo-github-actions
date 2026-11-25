@@ -1,0 +1,21 @@
+# Nombre del workflow: sale en la pestaña Actions
+name: GitHub Actions Demo
+# Nombre de cada ejecución; github.actor es quién hizo el push
+run-name: ${{ github.actor }} is testing out GitHub Actions
+# Event que lanza el workflow: cada push
+on: [push]
+jobs:
+  # Un solo job, con este nombre
+  Explore-GitHub-Actions:
+    # Runner: máquina virtual Ubuntu (también windows-latest o macos-latest)
+    runs-on: ubuntu-latest
+    steps:
+      # run ejecuta un comando; github.event_name es el event que lo lanzó (push)
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      # uses usa una action: checkout copia el repositorio en el runner, que empieza vacío
+      - name: Check out repository code
+        uses: actions/checkout@v6
+      # | permite varias líneas; ls lista la carpeta del repositorio (github.workspace)
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
